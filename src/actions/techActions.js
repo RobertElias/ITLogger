@@ -3,25 +3,25 @@ import {
   ADD_TECH,
   DELETE_TECH,
   SET_LOADING,
-  TECHS_ERROR,
+  TECHS_ERROR
 } from './types';
 
 // Get techs from server
 export const getTechs = () => async dispatch => {
   try {
-    setLoading ();
+    setLoading();
 
-    const res = await fetch ('/techs');
-    const data = await res.json ();
+    const res = await fetch('/techs');
+    const data = await res.json();
 
-    dispatch ({
+    dispatch({
       type: GET_TECHS,
-      payload: data,
+      payload: data
     });
   } catch (err) {
-    dispatch ({
+    dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText,
+      payload: err.response.statusText
     });
   }
 };
@@ -29,45 +29,45 @@ export const getTechs = () => async dispatch => {
 // Add technician to server
 export const addTech = tech => async dispatch => {
   try {
-    setLoading ();
+    setLoading();
 
-    const res = await fetch ('/techs', {
+    const res = await fetch('/techs', {
       method: 'POST',
-      body: JSON.stringify (tech),
+      body: JSON.stringify(tech),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
-    const data = await res.json ();
+    const data = await res.json();
 
-    dispatch ({
+    dispatch({
       type: ADD_TECH,
-      payload: data,
+      payload: data
     });
   } catch (err) {
-    dispatch ({
+    dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText,
+      payload: err.response.statusText
     });
   }
 };
 
 export const deleteTech = id => async dispatch => {
   try {
-    setLoading ();
+    setLoading();
 
-    await fetch (`/techs/${id}`, {
-      method: 'DELETE',
+    await fetch(`/techs/${id}`, {
+      method: 'DELETE'
     });
 
-    dispatch ({
+    dispatch({
       type: DELETE_TECH,
-      payload: id,
+      payload: id
     });
   } catch (err) {
-    dispatch ({
+    dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText,
+      payload: err.response.statusText
     });
   }
 };
@@ -75,6 +75,6 @@ export const deleteTech = id => async dispatch => {
 // Set loading to true
 export const setLoading = () => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING
   };
 };
